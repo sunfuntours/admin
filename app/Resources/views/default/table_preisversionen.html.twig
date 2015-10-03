@@ -1,0 +1,103 @@
+{% extends 'default/index.html.twig' %}
+
+{% block container %}
+
+	<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
+        
+        <section class="content">
+
+        <!-- Table normal -->
+    {% if table_normal %}
+       	<div class="col-xs-12">
+       	<form method="POST">
+       		<div class="box"> 
+       			<div class="box-header">
+                	<h3 class="box-title">{{ table_normal.title }}</h3>
+                   
+                   
+                   <div class="box-tools pull-right">
+                    <div class="has-feedback">
+                      <input type="text" name="table_search" value="{{ app.request.get('table_search')}}" class="form-control input-sm" placeholder="Preisversion suchen">
+                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                  </div>
+					
+                </div>
+                
+                <div class="box-body table-responsive">
+                	{{ dump(table_normal) }}
+                	<center>
+                			<a href="erstellen" class="btn btn-block btn-xs btn-primary"><i class="fa fa-plus"></i> neue Preisversion anlegen</a>
+                	</center>
+					</div>
+                  	<table class="table table-hover">
+                    <tbody>
+                    	<tr>
+							<th>ID</th>
+							<th>Hotel</th>
+							<th>Agentur</th>
+							<th>Erstellt</th>
+							<th>Status</th>
+							{% if table_normal.preisversionen[0].pvanzahl is defined > 0 %}
+							<th>Anzahl</th>
+							{% endif%}
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+	                    </tr>
+	                    
+	                    {% for item in table_normal.preisversionen %}
+	                    	                    	
+	                    		{% set preisversionen = item %}
+
+	                    <tr>
+	                        <td>{{ preisversionen.pvid }}</td>
+							<td>{{ preisversionen.pvhotel.honame }} </td>
+							<td>{{ preisversionen.pvagentur.agname }} </td>
+							<td>{{ preisversionen.pvcreated|date('d.m.Y H:i') }} </td>
+							<td>
+								{% if preisversionen.pvstatus %}
+									<span class="label label-success">aktiv</span>
+								{% else %}
+									<span class="label label-danger">inaktiv</span>
+								{% endif%}
+							</td>
+							{% if preisversionen.pvanzahl is defined %}
+							<td>
+							{{ preisversionen.pvanzahl }}
+							</td>
+							{% endif %}
+							<td>
+								<a href="{{ path('preisversionen_erstellen', {'pvid': preisversionen.pvid}) }}" class="btn btn-sm">
+								<i class="fa fa-gear"></i></a>
+							</td>
+							<td>
+								<a href="{{ path('preisversionen_generieren', {'pvid': preisversionen.pvid}) }}" class="btn btn-sm btn-primary">
+								<i class="fa fa-calculator"></i></a>
+							</td>
+	                    </tr>
+	                    {% endfor %}
+					</tbody>
+					</table>
+                </div>
+                
+                
+       		</div>
+       		</form>
+       	</div>
+    {% endif %}
+	    </section>
+    </div>
+{% endblock %}

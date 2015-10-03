@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div id="wrapper">
+    
+    	{% if app.user %}
+		    {% include 'default/header.html.twig' %}
+	    
+			{% include 'default/sidebar.html.twig' %}
+		{% endif%}
+	    
+			{% block container %}
+        	
+        		<h1> Die Startseite</h1>
+        	
+			{% endblock %}
+        
+			{% include 'default/footer.html.twig' %}
+    </div>
+    
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{# app/Resources/views/security/login.html.twig #}
+
+{% extends 'default/index.html.twig' %}
+
+{% block container %}
+
+<div class="login-box">
+	<div class="login-logo">
+        <a href="#"><b>ASP</b>Admin</a>
+      </div>
+	<div class="login-box-body">
+		
+		<p class="login-box-msg">
+		{% if error %}
+			{{ error.message}}
+			<br>
+			{{ error.messageKey|trans(error.messageData, 'security') }}
+		{% else %}
+			Einlogen zum starten... Bitte
+		{% endif %}
+		 </p>
+		<form class=""  action="{{ path('login_check') }}" method="post">
+            <div class="form-group has-feedback">
+                        <input type="text" name="_username" value="{{ last_username }}" class="form-control" id="inputUsername" placeholder="Benutzername">
+						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+	        <div class="form-group has-feedback">
+	            <input type="password" name="_password" class="form-control" id="inputPassword" placeholder="Passwort">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+	        </div>
+                    
+                  
+                <div class="box-footer">
+					<input type="hidden" name="/" value="/account" />
+					<button type="submit" class="btn btn-info pull-right">Einlogen</button>
+                </div><!-- /.box-footer -->
+          
+		</form>
+	</div>
+</div>
+
+{% endblock %}

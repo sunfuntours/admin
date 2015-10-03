@@ -1,0 +1,37 @@
+{% block form_row %}
+	{% if item.pvr_range is defined %}
+		<div class="row add">
+			<div class="col-sm-3">
+						{{ form_label(item.pvr_gueltig_bis) }}
+						<div class="input-group">
+							<div class="input-group-addon">
+		                        <i class="fa fa-calendar"></i>
+							</div>
+							{{ form_widget(item.pvr_gueltig_bis, { 'attr': {'class': 'form-control datepicker', 'data-date-format': 'dd.mm.yyyy'} }) }}
+						</div>
+			</div>
+			<div class="col-sm-3">
+						{{ form_label(item.pvr_range) }}
+						<div class="input-group">
+							<div class="input-group-addon">
+		                        <i class="fa fa-calendar"></i>
+							</div>
+							{{ form_widget(item.pvr_range, { 'attr': {'class': 'form-control daterange'} }) }}
+						</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="col-sm-2">
+				{{ form_label(item.pvr_p_prozent) }}
+				{{ form_widget(item.pvr_p_prozent, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pvr_p_min_naechte) }}
+				{{ form_widget(item.pvr_p_min_naechte, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-1 col-del">
+				
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

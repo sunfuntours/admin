@@ -1,0 +1,172 @@
+{% extends 'default/container.html.twig' %}
+
+{% form_theme form _self %}
+	
+	{% block form_widget_button %}
+	{% endblock form_widget_button %}
+	
+	{% block form_row %}
+		<div class="form-group">
+			{% spaceless %}
+		        {{ form_label(form, null, {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+		        {{ form_errors(form) }}
+	        	<div class="col-sm-10">
+	        	{{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+	        	</div>
+			{% endspaceless %}
+		</div>
+	{% endblock form_row %}
+
+
+	
+	
+{% block main_content %}
+<form class="box box-info" method="POST">
+    {# ... render the form #}
+    
+	<div class="box-body">
+    {% if form.vars.value.pvid is defined %}
+		<div class="row">
+			<div class="col-sm-8">
+				<table class="table">
+					<tr>
+						<th>
+							ID:
+						</th>
+						<td>
+							{{ form.vars.value.pvid}}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Hotel:
+						</th>
+						<td>
+							{{ form.vars.value.pvhotel.honame}}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Agentur:
+						</th>
+						<td>
+							{{ form.vars.value.pvagentur.agname}}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Erstellt am:
+						</th>
+						<td>
+							{{ form.vars.value.pvcreated | date('d.m.y H:i')}}
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Geändert am:
+						</th>
+						<td>
+							{{ form.vars.value.pvupdated | date('d.m.y H:i')}}
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-4 form-horizontal">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<div class="col-sm-4 control-label">
+							{{form_label(form.pv_status)}}
+							</div>
+							<div class="col-sm-8">
+							{{form_widget(form.pv_status, { 'attr': {'class': 'form-control'} })}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						{{ form_widget(form.save, { 'attr': {'class': 'fa fa-save btn btn-lg btn-success btn-block'}}) }}
+					</div>
+					<div class="col-sm-6">
+						{{ form_widget(form.delete, { 'attr': {'class': 'fa fa-trash btn btn-lg btn-danger btn-block'}}) }}
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-12">
+						<a href="{{ path('preisversionen_generieren', {'pvid': form.vars.value.pvid}) }}" class="btn btn-lg btn-block btn-primary">Preise durchkalkulieren</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-7 control-label">
+						{{form_label(form.pv_strafnaechte)}}
+					</div>
+					<div class="col-sm-5">
+					{{  form_widget(form.pv_strafnaechte, { 'attr': {'class': 'form-control'} })}}
+					</div>
+				</div>
+				{% if form.vars.value.pvstrafnaechte %}
+				<div class="form-group">
+					<div class="col-sm-7 control-label">
+						{{form_label(form.pv_strafnaechte_preis)}}
+					</div>
+					<div class="col-sm-5 ">
+						<div class="input-group">
+						<span class="input-group-addon">€</span>
+						{{ form_widget(form.pv_strafnaechte_preis, { 'attr': {'class': 'form-control'}, 'scale' : 2 })}}
+						</div>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+			<div class="col-sm-4 form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-7 control-label">
+						{{form_label(form.pv_max_belegung)}}
+					</div>
+					<div class="col-sm-5">
+					{{  form_widget(form.pv_max_belegung, { 'attr': {'class': 'form-control'} })}}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-7 control-label">
+						{{form_label(form.pv_rabatt_dreibett)}}
+					</div>
+					<div class="col-sm-5">
+					{{  form_widget(form.pv_rabatt_dreibett, { 'attr': {'class': 'form-control'} })}}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-7 control-label">
+						{{form_label(form.pv_rabatt_vierbett)}}
+					</div>
+					<div class="col-sm-5">
+					{{  form_widget(form.pv_rabatt_vierbett, { 'attr': {'class': 'form-control'} })}}
+					</div>
+				</div>
+			</div>
+			
+			
+			{% if form.pv_preise is defined or form.pv_aufpreise is defined %}
+			<div class="col-sm-12">
+				{% include 'form/form_pvpreise.html.twig' %}
+			</div>
+			{% endif %}
+				
+		</div>
+	{% else %}
+		{{ form_row(form.pv_status) }}
+		{{ form_row(form.pv_agentur) }}
+		{{ form_row(form.pv_hotel) }}
+		{{ form_row(form.save) }}
+	{% endif %}
+	</div>
+	{{ form_row(form._token) }}
+	
+</form>
+{% endblock %}

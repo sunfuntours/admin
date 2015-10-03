@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /Users/ddelgado/Documents/Arbeit/ASP/WEB_PROJEKTE/admin/app/config/routing_dev.yml

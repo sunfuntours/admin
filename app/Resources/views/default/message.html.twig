@@ -1,0 +1,53 @@
+{% if message is defined %}
+	{% block message %}
+
+		{% if message.danger is defined %}
+			<div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> WARNUNG!</h4>
+                    <ul>
+                    {% for news in message.danger %}
+                    	<li>{{ news}}</li>
+                    {% endfor %}
+            </div>
+		{% endif %}	
+		
+		{% if message.info is defined %}
+			<div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-info"></i> Info!</h4>
+					<ul>
+                    {% for news in message.info %}
+                    	<li>{{ news}}</li>
+                    {% endfor %}
+					</ul>
+            </div>
+		{% endif %}
+		
+		{% if message.alert is defined %}
+			<div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-warning"></i> Achtung!</h4>
+					<ul>
+					{% for news in message.alert %}
+                    	<li>{{ news}}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+		{% endif %}
+			
+		{% if message.success is defined %}
+			<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>	<i class="icon fa fa-check"></i> Erfolgreich!</h4>
+                    <ul>
+					{% for news in message.success %}
+                    	<li>{{ news}}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+		{% endif %}
+		
+	{% endblock %}
+
+{% endif %}

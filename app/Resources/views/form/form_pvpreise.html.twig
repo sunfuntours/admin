@@ -1,0 +1,86 @@
+{% if form.pv_preise is defined %}
+
+<div class="box box-primary">
+	<div class="box-header">
+        <h3 class="box-title"><strong>Grundpreise</strong></h3>
+    </div>
+    <div class="box-body collection" data-prototype="{% filter escape %}{% include 'form/form_pvpreise_prototype.html.twig' with { 'item': form.pv_preise.vars.prototype } %}{% endfilter %}" id="pvpreise" class="holder">
+	{% for item in form.pv_preise %}
+	    {% include 'form/form_pvpreise_prototype.html.twig' %}
+	{% endfor %}
+	</div>
+		<div class="row">
+			<div class="col-sm-12">
+			
+			</div>
+		</div>
+</div>
+
+{% endif %}
+
+{% if form.pv_aufpreise is defined %}
+<div class="box box-primary">
+	<div class="box-header">
+        <h3 class="box-title"><strong>Aufpreise</strong></h3>
+    </div>
+    <div class="box-body collection" data-prototype="{% filter escape %}{% include 'form/form_pvpreise_prototype.html.twig' with { 'item': form.pv_aufpreise.vars.prototype } %}{% endfilter %}" id="pvaufpreise" class="holder">
+	{% for item in form.pv_aufpreise %}
+	    {% include 'form/form_pvpreise_prototype.html.twig' %}
+	{% endfor %}
+	</div>
+		<div class="row">
+			<div class="col-sm-12 addbutton">
+			
+			</div>
+		</div>
+</div>
+
+{% endif %}
+
+{% if form.pv_zuschlaege is defined %}
+<div class="box box-primary">
+	<div class="box-header">
+        <h3 class="box-title"><strong>Zuschläge</strong></h3>
+    </div>
+    <div class="box-body collection" data-prototype="{% filter escape %}{% include 'form/form_pvzuschlaege_prototype.html.twig' with { 'item': form.pv_zuschlaege.vars.prototype } %}{% endfilter %}" id="pvzuschlaege" class="holder">
+	{% for item in form.pv_zuschlaege %}
+	    {% include 'form/form_pvzuschlaege_prototype.html.twig' %}
+	{% endfor %}
+	</div>
+		<div class="row">
+			<div class="col-sm-12 addbutton">
+			
+			</div>
+		</div>
+</div>
+
+{% endif %}
+
+{% if form.pv_rabatte is defined %}
+<div class="box box-primary">
+	<div class="box-header">
+        <h3 class="box-title"><strong>Frübbucherrabatte</strong></h3>
+    </div>
+    <div class="box-body collection" data-prototype="{% filter escape %}{% include 'form/form_pvrabatte_prototype.html.twig' with { 'item': form.pv_rabatte.vars.prototype } %}{% endfilter %}" id="pvzuschlaege" class="holder">
+	{% for item in form.pv_rabatte %}
+	    {% include 'form/form_pvrabatte_prototype.html.twig' %}
+	{% endfor %}
+	</div>
+		<div class="row">
+			<div class="col-sm-12 addbutton">
+			
+			</div>
+		</div>
+</div>
+
+{% endif %}
+
+
+	<link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+	<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+	<script src="/dist/js/sk.js"></script>
+{% block javascripts %}
+
+
+{% endblock %}

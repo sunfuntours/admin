@@ -1,0 +1,505 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use \DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Preisversionen
+ *
+ * @ORM\Table(name="preisversionen")})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PreisversionenRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Preisversionen
+{
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="pv_id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $pv_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="SDHotels")
+     * @ORM\JoinColumn(name="pv_hotel", referencedColumnName="ho_id")
+     */
+    protected $pv_hotel;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="SDAgenturen")
+     * @ORM\JoinColumn(name="pv_agentur", referencedColumnName="ag_id")
+     */
+    protected $pv_agentur;
+    
+    public $pv_anzahl;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pv_status", type="boolean", nullable=false)
+     */
+    private $pv_status;    
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pv_strafnaechte", type="integer", length=2)
+     */
+    private $pv_strafnaechte = 0;    
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pv_rabatt_dreibett", type="integer", length=2)
+     */
+    private $pv_rabatt_dreibett = 0;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pv_rabatt_vierbett", type="integer", length=2)
+     */
+    private $pv_rabatt_vierbett = 0;
+    
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="pv_strafnaechte_preis", type="decimal", precision=7, scale=2)
+     */
+    private $pv_strafnaechte_preis = 0;
+    
+	/**
+     * @var datetime
+     *
+     * @ORM\Column(name="pv_created", type="datetime")
+     */
+    private $pv_created;	
+    
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="pv_updated", type="datetime")
+     */
+    private $pv_updated;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PvPreise", mappedBy="pvp_pv_id", indexBy="pv_id", cascade={"persist"})
+     */
+     
+    protected $pv_preise;    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PvAufpreise", mappedBy="pva_pv_id", indexBy="pv_id", cascade={"persist"})
+     */
+     
+    protected $pv_aufpreise;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PvZuschlaege", mappedBy="pvz_pv_id", indexBy="pv_id", cascade={"persist"})
+     */
+     
+    protected $pv_zuschlaege;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PvRabatte", mappedBy="pvr_pv_id", indexBy="pv_id", cascade={"persist"})
+     */
+     
+    protected $pv_rabatte;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="TagesPreise", mappedBy="tv_pv_id", indexBy="pv_id", cascade={"persist"})
+     */
+ 
+    protected $tages_preise;
+    
+    
+    /**
+     * Get pv_id
+     *
+     * @return integer 
+     */
+    public function getPvId()
+    {
+        return $this->pv_id;
+    }
+
+    /**
+     * Set pv_hotel
+     *
+     * @param \AppBundle\Entity\SDHotels $pvHotel
+     * @return Preisversionen
+     */
+    public function setPvHotel(\AppBundle\Entity\SDHotels $pvHotel = null)
+    {
+        $this->pv_hotel = $pvHotel;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_hotel
+     *
+     * @return \AppBundle\Entity\SDHotels 
+     */
+    public function getPvHotel()
+    {
+        return $this->pv_hotel;
+    }
+
+    /**
+     * Set pv_agentur
+     *
+     * @param \AppBundle\Entity\SDAgenturen $pvAgentur
+     * @return Preisversionen
+     */
+    public function setPvAgentur(\AppBundle\Entity\SDAgenturen $pvAgentur = null)
+    {
+        $this->pv_agentur = $pvAgentur;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_agentur
+     *
+     * @return \AppBundle\Entity\SDAgenturen
+     */
+    public function getPvAgentur()
+    {
+        return $this->pv_agentur;
+    }
+    
+    /**
+     * Get pv_created
+     *
+     * @return \DateTime 
+     */
+    public function getPvCreated()
+    {
+        return $this->pv_created;
+    }
+
+    /**
+     * Set pv_status
+     *
+     * @param boolean $pvStatus
+     * @return Preisversionen
+     */
+    public function setPvStatus($pvStatus)
+    {
+        $this->pv_status = $pvStatus;
+
+        return $this->pv_status;
+    }
+
+    /**
+     * Get pv_status
+     *
+     * @return boolean 
+     */
+    public function getPvStatus()
+    {
+        return $this->pv_status;
+    }
+    
+    /**
+     * Get pv_anzahl
+     *
+     * @return integer 
+     */
+    public function getPvAnzahl()
+    {
+        return $this->pv_anzahl;
+    }
+
+    /**
+     * Set pv_strafnaechte
+     *
+     * @param integer $pvStrafnaechte
+     * @return Preisversionen
+     */
+    public function setPvStrafnaechte($pvStrafnaechte)
+    {
+        $this->pv_strafnaechte = $pvStrafnaechte;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_strafnaechte
+     *
+     * @return integer 
+     */
+    public function getPvStrafnaechte()
+    {
+        return $this->pv_strafnaechte;
+    }
+
+    /**
+     * Set pv_strafnaechte_preis
+     *
+     * @param string $pvStrafnaechtePreis
+     * @return Preisversionen
+     */
+    public function setPvStrafnaechtePreis($pvStrafnaechtePreis)
+    {
+        $this->pv_strafnaechte_preis = $pvStrafnaechtePreis;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_strafnaechte_preis
+     *
+     * @return string 
+     */
+    public function getPvStrafnaechtePreis()
+    {
+        return $this->pv_strafnaechte_preis;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+	    if(!$this->pv_created) $this->pv_created = new DateTime();
+	    
+        $this->pv_preise = new ArrayCollection();
+        $this->pv_aufpreise = new ArrayCollection();
+        $this->pv_zuschlaege = new ArrayCollection();
+        $this->pv_rabatte = new ArrayCollection();
+    }
+
+
+    /**
+     * Add pv_preise
+     *
+     * @param \AppBundle\Entity\PvPreise $pvPreise
+     * @return Preisversionen
+     */
+    public function addPvPreise(\AppBundle\Entity\PvPreise $pvPreise)
+    {
+	    
+		$pvPreise->setPvpPvId($this);
+		
+        $this->pv_preise->add($pvPreise);
+        
+    }
+	
+    /**
+     * Remove pv_preise
+     *
+     * @param \AppBundle\Entity\PvPreise $pvPreise
+     */
+    public function removePvPreise(\AppBundle\Entity\PvPreise $pvPreise)
+    {
+        $this->pv_preise->removeElement($pvPreise);
+    }
+
+    /**
+     * Get pv_preise
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPvPreise()
+    {
+        return $this->pv_preise;
+    }
+
+
+    /**
+     * Set pv_updated
+     *
+     * @param \DateTime $pvUpdated
+     * @return Preisversionen
+     */
+    public function setPvUpdated($pvUpdated)
+    {
+        $this->pv_updated = $pvUpdated;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_updated
+     *
+     * @return \DateTime 
+     */
+    public function getPvUpdated()
+    {
+        return $this->pv_updated;
+    }
+
+    /**
+     * Set pv_created
+     *
+     * @param \DateTime $pvCreated
+     * @return Preisversionen
+     */
+    public function setPvCreated($pvCreated)
+    {
+        $this->pv_created = $pvCreated;
+
+        return $this;
+    }
+
+    /**
+     * Add pv_aufpreise
+     *
+     * @param \AppBundle\Entity\PvAufpreis $pvAufpreise
+     * @return Preisversionen
+     */
+    public function addPvAufpreise(\AppBundle\Entity\PvAufpreise $pvAufpreise)
+    {
+	    
+		$pvAufpreise->setPvaPvId($this);
+		
+        $this->pv_aufpreise->add($pvAufpreise);
+        
+        return $this;
+    }
+
+    /**
+     * Remove pv_aufpreise
+     *
+     * @param \AppBundle\Entity\PvAufpreis $pvAufpreise
+     */
+    public function removePvAufpreise(\AppBundle\Entity\PvAufpreise $pvAufpreise)
+    {
+        $this->pv_aufpreise->removeElement($pvAufpreise);
+    }
+
+    /**
+     * Get pv_aufpreise
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPvAufpreise()
+    {
+        return $this->pv_aufpreise;
+    }
+
+    /**
+     * Set pv_rabatt_dreibett
+     *
+     * @param integer $pvRabattDreibett
+     * @return Preisversionen
+     */
+    public function setPvRabattDreibett($pvRabattDreibett)
+    {
+        $this->pv_rabatt_dreibett = $pvRabattDreibett;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_rabatt_dreibett
+     *
+     * @return integer 
+     */
+    public function getPvRabattDreibett()
+    {
+        return $this->pv_rabatt_dreibett;
+    }
+
+    /**
+     * Set pv_rabatt_vierbett
+     *
+     * @param integer $pvRabattVierbett
+     * @return Preisversionen
+     */
+    public function setPvRabattVierbett($pvRabattVierbett)
+    {
+        $this->pv_rabatt_vierbett = $pvRabattVierbett;
+
+        return $this;
+    }
+
+    /**
+     * Get pv_rabatt_vierbett
+     *
+     * @return integer 
+     */
+    public function getPvRabattVierbett()
+    {
+        return $this->pv_rabatt_vierbett;
+    }
+
+    /**
+     * Add pv_zuschlaege
+     *
+     * @param \AppBundle\Entity\PvZuschlaege $pvZuschlaege
+     * @return Preisversionen
+     */
+    public function addPvZuschlaege(\AppBundle\Entity\PvZuschlaege $pvZuschlaege)
+    {
+	    $pvZuschlaege->setPvzPvId($this);
+	    
+        $this->pv_zuschlaege[] = $pvZuschlaege;
+
+        return $this;
+    }
+
+    /**
+     * Remove pv_zuschlaege
+     *
+     * @param \AppBundle\Entity\PvZuschlaege $pvZuschlaege
+     */
+    public function removePvZuschlaege(\AppBundle\Entity\PvZuschlaege $pvZuschlaege)
+    {
+        $this->pv_zuschlaege->removeElement($pvZuschlaege);
+    }
+
+    /**
+     * Get pv_zuschlaege
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPvZuschlaege()
+    {
+        return $this->pv_zuschlaege;
+    }
+
+    /**
+     * Add pv_rabatte
+     *
+     * @param \AppBundle\Entity\PvRabatte $pvRabatte
+     * @return Preisversionen
+     */
+    public function addPvRabatte(\AppBundle\Entity\PvRabatte $pvRabatte)
+    {
+	    $pvRabatte->setPvrPvId($this);
+	    
+        $this->pv_rabatte[] = $pvRabatte;
+
+        return $this;
+    }
+
+    /**
+     * Remove pv_rabatte
+     *
+     * @param \AppBundle\Entity\PvRabatte $pvRabatte
+     */
+    public function removePvRabatte(\AppBundle\Entity\PvRabatte $pvRabatte)
+    {
+        $this->pv_rabatte->removeElement($pvRabatte);
+    }
+
+    /**
+     * Get pv_rabatte
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPvRabatte()
+    {
+        return $this->pv_rabatte;
+    }
+}

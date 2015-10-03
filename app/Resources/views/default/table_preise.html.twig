@@ -1,0 +1,72 @@
+{% extends 'default/index.html.twig' %}
+
+{% block container %}
+
+	<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
+        
+        <section class="content">
+
+        <!-- Table normal -->
+    {% if preise %}
+       	<div class="col-xs-12">
+       	<form method="POST">
+       		<div class="box"> 
+       			<div class="box-header">                   
+                   
+                   <div class="box-tools pull-right">
+                    <div class="has-feedback">
+                      <input type="text" name="table_search" value="{{ app.request.get('table_search')}}" class="form-control input-sm" placeholder="Preisversion suchen">
+                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                  </div>
+					
+                </div>
+                
+                <div class="box-body table-responsive">
+                	{{ dump(preise) }}
+                	<center>
+                			<a href="{{ path('preisversionen_erstellen', {'pvid': preise.pvid}) }}" class="btn btn-block btn-xs btn-success"><i class="fa fa-gear"></i> Daten bearbeiten</a>
+                	</center>
+					</div>
+                  	<table class="table table-hover">
+                    <tbody>
+                    	<tr>
+							<th>ID</th>
+							<th>Datum</th>
+	                    </tr>
+	                    
+	                    {% for item in preise.getTagesPreise() %}
+
+	                    <tr>
+							<td>{{ item.pvid | default('-/-')}}</td>
+							<td>{{ item.getTpDatum | date('d.m.Y') }} </td>
+							<td>{{ item.getTpPRo}} </td>
+							<td>{{ item.getTpPFr}} </td>
+							<td>{{ item.getTpPHP}} </td>
+							<td>{{ item.getTpPVp}} </td>
+							<td>{{ item.getTpPAi}} </td>
+	                    </tr>
+	                    {% endfor %}
+					</tbody>
+					</table>
+                </div>
+                
+                
+       		</div>
+       		</form>
+       	</div>
+    {% endif %}
+	    </section>
+    </div>
+{% endblock %}

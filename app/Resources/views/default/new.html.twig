@@ -1,0 +1,32 @@
+{# app/Resources/views/default/new.html.twig #}
+
+{% extends 'default/index.html.twig' %}
+
+{% form_theme form 'form/fields.html.twig' %}
+
+{% block status %}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		
+		<h3>Category</h3>
+		<div class="category">
+		    {{ form_row(form.kategorie.name) }}
+		</div>
+		
+		<div>
+		        {{ form_label(form.task) }}
+		        {{ form_errors(form.task) }}
+		        {{ form_widget(form.task) }}
+		</div>
+		<div>
+		        {{ form_label(form.dueDate) }}
+		        {{ form_errors(form.dueDate) }}
+		        {{ form_widget(form.dueDate) }}
+		</div>
+		
+		<div> 
+			Buttons
+			{{form_widget(form)}}
+		</div>
+	{{ form_end(form) }}
+{% endblock %}

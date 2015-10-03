@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: sql380.your-server.de
+    database_port: null
+    database_name: asp_preise
+    database_user: asp_user
+    database_password: p8u6MS5WyGWzMLdW
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: ThisTokenIsNotSoSecretChangeIt

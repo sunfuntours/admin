@@ -1,0 +1,22 @@
+{% block form_row %}
+	<div class="row">
+			<div class="col-sm-3">
+						{{ form_label(item.pvz_range) }}
+						<div class="input-group">
+							<div class="input-group-addon">
+		                        <i class="fa fa-calendar"></i>
+							</div>
+							{{ form_widget(item.pvz_range, { 'attr': {'class': 'form-control daterange'} }) }}
+						</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="col-sm-2">
+				{{ form_label(item.pvz_p_euro) }}
+				{{ form_widget(item.pvz_p_euro, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-1 col-del">
+				
+				</div>
+			</div>
+		</div>
+{% endblock %}

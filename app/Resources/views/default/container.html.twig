@@ -1,0 +1,37 @@
+{% extends 'default/index.html.twig' %}
+
+{% block container %}
+
+	<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        
+        
+        <section class="content-header">
+	        {% include 'default/message.html.twig' %}	
+			<h1>
+				{% if sinfo.ueberschrift is defined %}
+					{{ sinfo.ueberschrift }}
+				{% else %}
+            		Dashboard
+				{% endif %}
+				
+				<small>Control panel</small>
+			</h1>
+			<ol class="breadcrumb">
+            	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li class="active">Dashboard</li>
+			</ol>
+          
+        </section>
+        
+
+        <!-- Main content -->
+        <section class="content">
+	
+	        {% block main_content %}
+	        	{{ inhalt | raw }}
+	        	
+	        {% endblock%}
+        </section><!-- right col -->
+    </div>
+{% endblock %}

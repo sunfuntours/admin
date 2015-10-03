@@ -1,0 +1,350 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use \DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AppUsers
+ *
+ * @ORM\Table(name="pv_aufpreise")})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PvAufpreiseRepository")
+ */
+class PvAufpreise
+{
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="pva_id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $pva_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Preisversionen", inversedBy="pv_aufpreise", cascade={"persist"})
+     * @ORM\JoinColumn(name="pva_pv_id", referencedColumnName="pv_id")
+     */
+    protected $pva_pv_id;
+    
+	/**
+     * @var datetime
+     *
+     * @ORM\Column(name="pva_von", type="datetime")
+     */
+    protected $pva_von;
+    
+	/**
+     * @var datetime
+     *
+     * @ORM\Column(name="pva_bis", type="datetime")
+     */
+    private $pva_bis;
+    
+	/**
+     * @var string
+     */
+    private $pva_range;
+    
+	/**
+     * @var decimal
+     *
+     * @ORM\Column(name="pva_p_ro", type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $pva_p_ro = 0;
+    
+	/**
+     * @var decimal
+     *
+     * @ORM\Column(name="pva_p_fr", type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $pva_p_fr = 0;
+	/**
+     * @var decimal
+     *
+     * @ORM\Column(name="pva_p_hp", type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $pva_p_hp = 0;
+	/**
+     * @var decimal
+     *
+     * @ORM\Column(name="pva_p_vp", type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $pva_p_vp = 0;
+    
+	/**
+     * @var decimal
+     *
+     * @ORM\Column(name="pva_p_ai", type="decimal", precision=7, scale=2, nullable=true)
+    */
+     
+    private $pva_p_ai = 0;
+    
+
+    /**
+     * Get pva_id
+     *
+     * @return integer 
+     */
+    public function getPvaId()
+    {
+        return $this->pva_id;
+    }
+
+    /**
+     * Set pva_von
+     *
+     * @param \DateTime $pvaVon
+     * @return PvAufpreise
+     */
+    public function setPvaVon($pvaVon)
+    {
+        $this->pva_von = $pvaVon;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_von
+     *
+     * @return \DateTime 
+     */
+    public function getPvaVon()
+    {
+        return $this->pva_von;
+    }
+
+    /**
+     * Set pva_bis
+     *
+     * @param \DateTime $pvaBis
+     * @return PvAufpreise
+     */
+    public function setPvaBis($pvaBis)
+    {
+        $this->pva_bis = $pvaBis;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_bis
+     *
+     * @return \DateTime 
+     */
+    public function getPvaBis()
+    {
+        return $this->pva_bis;
+    }
+
+    /**
+     * Set pva_p_ro
+     *
+     * @param string $pvaPRo
+     * @return PvAufpreise
+     */
+    public function setPvaPRo($pvaPRo)
+    {
+        $this->pva_p_ro = $pvaPRo;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_p_ro
+     *
+     * @return string 
+     */
+    public function getPvaPRo()
+    {
+        return $this->pva_p_ro;
+    }
+
+    /**
+     * Set pva_p_fr
+     *
+     * @param string $pvaPFr
+     * @return PvAufpreise
+     */
+    public function setPvaPFr($pvaPFr)
+    {
+        $this->pva_p_fr = $pvaPFr;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_p_fr
+     *
+     * @return string 
+     */
+    public function getPvaPFr()
+    {
+        return $this->pva_p_fr;
+    }
+
+    /**
+     * Set pva_p_hp
+     *
+     * @param string $pvaPHp
+     * @return PvAufpreise
+     */
+    public function setPvaPHp($pvaPHp)
+    {
+        $this->pva_p_hp = $pvaPHp;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_p_hp
+     *
+     * @return string 
+     */
+    public function getPvaPHp()
+    {
+        return $this->pva_p_hp;
+    }
+
+    /**
+     * Set pva_p_vp
+     *
+     * @param string $pvapva
+     * @return PvAufpreise
+     */
+    public function setPvapva($pvapva)
+    {
+        $this->pva_p_vp = $pvapva;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_p_vp
+     *
+     * @return string 
+     */
+    public function getPvapva()
+    {
+        return $this->pva_p_vp;
+    }
+
+    /**
+     * Set pva_p_ai
+     *
+     * @param string $pvaPAi
+     * @return PvAufpreise
+     */
+    public function setPvaPAi($pvaPAi)
+    {
+        $this->pva_p_ai = $pvaPAi;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_p_ai
+     *
+     * @return string 
+     */
+    public function getPvaPAi()
+    {
+        return $this->pva_p_ai;
+    }
+
+    /**
+     * Set pva_pv_id
+     *
+     * @param \AppBundle\Entity\Preisversionen $pvaPvId
+     * @return PvAufpreise
+     */
+    public function setPvaPvId(\AppBundle\Entity\Preisversionen $pvaPvId)
+    {
+	    
+        $this->pva_pv_id = $pvaPvId;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_pv_id
+     *
+     * @return \AppBundle\Entity\Preisversionen 
+     */
+    public function getPvaPvId()
+    {
+        return $this->pva_pv_id;
+    }
+    
+    public function addpvaPvId(\AppBundle\Entity\Preisversionen $pvaPvId)
+    {
+	    if(!$this->pva_pv_id->contains($pvaPvId)) {
+		    $this->pva_pv_id->add($pvaPvId);
+	    }
+	    
+    }
+    /**
+     * Set pva_range
+     *
+     * @param string $pvaRange
+     * @return PvAufpreise
+     */
+    public function setPvaRange($pvaRange)
+    {
+	    if(!$pvaRange) return false;
+
+	    $this->pva_von = new DateTime(substr($pvaRange, 0, 10));
+	    $this->pva_bis = new DateTime(substr($pvaRange, 13, 10));
+	    
+        $this->pva_range = $this->pva_von->format('Y-m-d')." - ".$this->pva_bis->format('Y-m-d') ;
+
+        return $this->pva_range;
+    }
+
+    /**
+     * Get pva_range
+     *
+     * @return string 
+     */
+    public function getPvaRange()
+    {
+	    if(!$this->pva_von || !$this->pva_bis) return false;
+	    $datum = $this->pva_von->format('d/m/Y')." - ".$this->pva_bis->format('d/m/Y');
+	    
+        return $datum;
+    }
+    
+    public function __construct() {
+	    $this->pva_von = $this->pva_bis ?: new DateTime();
+	    $this->pva_bis = $this->pva_bis ?: new DateTime();
+    }
+    
+	
+
+    /**
+     * Set pva_p_vp
+     *
+     * @param string $pvaPVp
+     * @return PvAufpreise
+     */
+    public function setPvaPVp($pvaPVp)
+    {
+        $this->pva_p_vp = $pvaPVp;
+
+        return $this;
+    }
+
+    /**
+     * Get pva_p_vp
+     *
+     * @return string 
+     */
+    public function getPvaPVp()
+    {
+        return $this->pva_p_vp;
+    }
+}

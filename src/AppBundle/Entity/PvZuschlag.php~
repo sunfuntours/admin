@@ -1,0 +1,300 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use \DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AppUsers
+ *
+ * @ORM\Table(name="pv_zuschlaege")})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PvZuschlagRepository")
+ */
+class PvZuschlag
+{
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="pvz_id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $pvz_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Preisversionen", inversedBy="pv_zuschlaege", cascade={"persist"})
+     * @ORM\JoinColumn(name="pvz_pv_id", referencedColumnName="pv_id")
+     */
+    protected $pvz_pv_id;
+    
+	/**
+     * @var datetime
+     *
+     * @ORM\Column(name="pvz_von", type="datetime")
+     */
+    protected $pvz_von;
+    
+	/**
+     * @var datetime
+     *
+     * @ORM\Column(name="pvz_bis", type="datetime")
+     */
+    private $pvz_bis;
+    
+	/**
+     * @var string
+     */
+    private $pvz_range;
+    
+	/**
+     * @var decimal
+     *
+     * @ORM\Column(name="pvz_p_euro", type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $pvz_p_ro = 0;
+    
+
+    /**
+     * Get pvz_id
+     *
+     * @return integer 
+     */
+    public function getPvpId()
+    {
+        return $this->pvz_id;
+    }
+
+    /**
+     * Set pvz_von
+     *
+     * @param \DateTime $pvpVon
+     * @return PvZuschlag
+     */
+    public function setPvpVon($pvpVon)
+    {
+        $this->pvz_von = $pvpVon;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_von
+     *
+     * @return \DateTime 
+     */
+    public function getPvpVon()
+    {
+        return $this->pvz_von;
+    }
+
+    /**
+     * Set pvz_bis
+     *
+     * @param \DateTime $pvpBis
+     * @return PvZuschlag
+     */
+    public function setPvpBis($pvpBis)
+    {
+        $this->pvz_bis = $pvpBis;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_bis
+     *
+     * @return \DateTime 
+     */
+    public function getPvpBis()
+    {
+        return $this->pvz_bis;
+    }
+
+    /**
+     * Set pvz_p_ro
+     *
+     * @param string $pvpPRo
+     * @return PvZuschlag
+     */
+    public function setPvpPRo($pvpPRo)
+    {
+        $this->pvz_p_ro = $pvpPRo;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_p_ro
+     *
+     * @return string 
+     */
+    public function getPvpPRo()
+    {
+        return $this->pvz_p_ro;
+    }
+
+    /**
+     * Set pvz_p_fr
+     *
+     * @param string $pvpPFr
+     * @return PvZuschlag
+     */
+    public function setPvpPFr($pvpPFr)
+    {
+        $this->pvz_p_fr = $pvpPFr;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_p_fr
+     *
+     * @return string 
+     */
+    public function getPvpPFr()
+    {
+        return $this->pvz_p_fr;
+    }
+
+    /**
+     * Set pvz_p_hp
+     *
+     * @param string $pvpPHp
+     * @return PvZuschlag
+     */
+    public function setPvpPHp($pvpPHp)
+    {
+        $this->pvz_p_hp = $pvpPHp;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_p_hp
+     *
+     * @return string 
+     */
+    public function getPvpPHp()
+    {
+        return $this->pvz_p_hp;
+    }
+
+    /**
+     * Set pvz_p_vp
+     *
+     * @param string $pvpPVp
+     * @return PvZuschlag
+     */
+    public function setPvpPVp($pvpPVp)
+    {
+        $this->pvz_p_vp = $pvpPVp;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_p_vp
+     *
+     * @return string 
+     */
+    public function getPvpPVp()
+    {
+        return $this->pvz_p_vp;
+    }
+
+    /**
+     * Set pvz_p_ai
+     *
+     * @param string $pvpPAi
+     * @return PvZuschlag
+     */
+    public function setPvpPAi($pvpPAi)
+    {
+        $this->pvz_p_ai = $pvpPAi;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_p_ai
+     *
+     * @return string 
+     */
+    public function getPvpPAi()
+    {
+        return $this->pvz_p_ai;
+    }
+
+    /**
+     * Set pvz_pv_id
+     *
+     * @param \AppBundle\Entity\Preisversionen $pvpPvId
+     * @return PvZuschlag
+     */
+    public function setPvpPvId(\AppBundle\Entity\Preisversionen $pvpPvId)
+    {
+	    
+        $this->pvz_pv_id = $pvpPvId;
+
+        return $this;
+    }
+
+    /**
+     * Get pvz_pv_id
+     *
+     * @return \AppBundle\Entity\Preisversionen 
+     */
+    public function getPvpPvId()
+    {
+        return $this->pvz_pv_id;
+    }
+    
+    public function addPvpPvId(\AppBundle\Entity\Preisversionen $pvpPvId)
+    {
+	    if(!$this->pvz_pv_id->contains($pvpPvId)) {
+		    $this->pvz_pv_id->add($pvpPvId);
+	    }
+	    
+    }
+    /**
+     * Set pvz_range
+     *
+     * @param string $pvpRange
+     * @return PvZuschlag
+     */
+    public function setPvpRange($pvpRange)
+    {
+	    if(!$pvpRange) return false;
+
+	    $this->pvz_von = new DateTime(substr($pvpRange, 0, 10));
+	    $this->pvz_bis = new DateTime(substr($pvpRange, 13, 10));
+	    
+        $this->pvz_range = $this->pvz_von->format('Y-m-d')." - ".$this->pvz_bis->format('Y-m-d') ;
+
+        return $this->pvz_range;
+    }
+
+    /**
+     * Get pvz_range
+     *
+     * @return string 
+     */
+    public function getPvpRange()
+    {
+	    if(!$this->pvz_von || !$this->pvz_bis) return false;
+	    $datum = $this->pvz_von->format('d/m/Y')." - ".$this->pvz_bis->format('d/m/Y');
+	    
+        return $datum;
+    }
+    
+    public function __construct() {
+	    $this->pvz_von = $this->pvz_bis ?: new DateTime();
+	    $this->pvz_bis = $this->pvz_bis ?: new DateTime();
+    }
+    
+	
+}

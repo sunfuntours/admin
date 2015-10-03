@@ -1,0 +1,81 @@
+{% block form_row %}
+	{% if item.pvp_range is defined %}
+		<div class="row add">
+			<div class="col-sm-3">
+						{{ form_label(item.pvp_range) }}
+						<div class="input-group">
+							<div class="input-group-addon">
+		                        <i class="fa fa-calendar"></i>
+							</div>
+							{{ form_widget(item.pvp_range, { 'attr': {'class': 'form-control daterange'} }) }}
+						</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="col-sm-2">
+				{{ form_label(item.pvp_p_ro) }}
+				{{ form_widget(item.pvp_p_ro, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pvp_p_fr) }}
+				{{ form_widget(item.pvp_p_fr, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pvp_p_hp) }}
+				{{ form_widget(item.pvp_p_hp, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pvp_p_vp) }}
+				{{ form_widget(item.pvp_p_vp, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pvp_p_ai) }}
+				{{ form_widget(item.pvp_p_ai, { 'attr': {'class': 'form-control'} }) }}
+				
+				</div>
+				<div class="col-sm-1 col-del">
+				
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	
+	{% if item.pva_range is defined %}
+		<div class="row">
+			<div class="col-sm-3">
+						{{ form_label(item.pva_range) }}
+						<div class="input-group">
+							<div class="input-group-addon">
+		                        <i class="fa fa-calendar"></i>
+							</div>
+							{{ form_widget(item.pva_range, { 'attr': {'class': 'form-control daterange'} }) }}
+						</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="col-sm-2">
+				{{ form_label(item.pva_p_ro) }}
+				{{ form_widget(item.pva_p_ro, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pva_p_fr) }}
+				{{ form_widget(item.pva_p_fr, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pva_p_hp) }}
+				{{ form_widget(item.pva_p_hp, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pva_p_vp) }}
+				{{ form_widget(item.pva_p_vp, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="col-sm-2">
+				{{ form_label(item.pva_p_ai) }}
+				{{ form_widget(item.pva_p_ai, { 'attr': {'class': 'form-control'} }) }}
+				
+				</div>
+				<div class="col-sm-1 col-del">
+				
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

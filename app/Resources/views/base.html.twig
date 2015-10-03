@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% if sinfo.title is defined %} {{ sinfo.title }}{% else %} Welcome! {% endif %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	    <!-- Font Awesome -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	    <!-- Ionicons -->
+	    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	    <!-- Theme style -->
+	    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+	    <!-- AdminLTE Skins. Choose a skin from the css/skins
+	         folder instead of downloading all of them to reduce the load. -->
+	    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+	    <!-- Latest compiled and minified CSS -->
+	    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	    <script>
+			  var AdminLTEOptions = {
+			    //Enable sidebar expand on hover effect for sidebar mini
+			    //This option is forced to true if both the fixed layout and sidebar mini
+			    //are used together
+			    sidebarExpandOnHover: true,
+			    //BoxRefresh Plugin
+			    enableBoxRefresh: true,
+			    //Bootstrap.js tooltip
+			    enableBSToppltip: true
+			  };
+		</script>
+		<script src="/dist/js/app.js" type="text/javascript"></script>
+    </head>
+    <body class="skin-blue sidebar-mini wysihtml5-supported">
+    
+        {% block body %}
+        {% endblock %}
+        
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>
